@@ -1,0 +1,1113 @@
+﻿@model HoangHung_ERP_System.ViewModels.HRWorldEditViewModel
+
+@{
+    ViewBag.Title = "Thêm hồ sơ";
+
+}
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">Thêm hồ sơ ứng viên</h1>
+        </div>
+        <!-- /.col-lg-12 -->
+    </div>
+    <!-- /.row -->
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    Thông tin hồ sơ
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-lg-12">
+
+                            <div class="form-group row">
+
+                                <div class="col-lg-6">
+                                    @Html.LabelFor(x => Model.NameUngVien, htmlAttributes: new { @class = "col-sm-3 col-form-label text-right" })
+                                    <div class="col-sm-9">
+                                        @Html.EditorFor(model => model.NameUngVien, new { htmlAttributes = new { @class = "form-control", @autofocus = "autofocus" } })
+                                        @Html.ValidationMessageFor(model => model.NameUngVien, "", new { @class = "text-danger" })
+                                    </div>
+
+
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <label class="col-sm-3 col-form-label text-right">
+                                        Ngày sinh
+                                    </label>
+                                    <div class="col-sm-9">
+                                        @Html.EditorFor(model => model.NgaySinh, new { htmlAttributes = new { @class = "form-control date-field" } })
+                                        @Html.ValidationMessageFor(model => model.NgaySinh, "", new { @class = "text-danger" })
+                                    </div>
+
+
+                                </div>
+
+
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-lg-6">
+                                    <label class="col-md-3 control-label text-right">Thuộc đối tượng:</label>
+                                    <div class="col-md-9 text-left">
+                                        <label class="radio-inline" for="doituong-0">
+                                            <input type="radio" name="doituong" id="doituong-0" value="TTS" checked="checked">
+                                            TTS
+                                        </label>
+                                        <label class="radio-inline" for="doituong-1">
+                                            <input type="radio" name="doituong" id="doituong-1" value="Kỹ sư">
+                                            Kỹ sư
+                                        </label>
+                                        <label class="radio-inline" for="doituong-2">
+                                            <input type="radio" name="doituong" id="doituong-2" value="Nhân viên">
+                                            Nhân viên
+                                        </label>
+
+                                        <label class="radio-inline" for="doituong-3">
+                                            <input type="radio" name="doituong" id="doituong-3" value="Vị trí khác">
+                                            Vị trí khác
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <label class="col-md-3 control-label text-right">Cán bộ tuyển dụng:</label>
+
+                                    <div class="col-sm-9">
+                                        @Html.DropDownListFor(x => Model.SelectEmployee, new SelectList(Model.Employees, "Value", "Text"), htmlAttributes: new { @class = "form-control", id = "Employee" })
+                                        @Html.ValidationMessageFor(x => x.SelectEmployee, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+
+                                <div class="col-lg-6">
+                                    <label class="col-sm-3 col-form-label text-right">
+                                        Phòng / nhóm tuyển dụng:
+                                    </label>
+                                    <div class="col-sm-9">
+                                        @Html.DropDownListFor(x => Model.SelectDepartment, new SelectList(Model.Departments, "Value", "Text"), htmlAttributes: new { @class = "form-control", id = "Department" })
+                                        @Html.ValidationMessageFor(x => x.SelectDepartment, "", new { @class = "text-danger" })
+
+                                    </div>
+
+
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <label class="col-sm-3 col-form-label text-right">
+                                        Công ty tuyển dụng:
+                                    </label>
+                                    <div class="col-sm-9">
+                                        @Html.DropDownListFor(x => Model.SelectCompany, new SelectList(Model.Companies, "Value", "Text"), htmlAttributes: new { @class = "form-control", id = "Company" })
+                                        @Html.ValidationMessageFor(x => x.SelectCompany, "", new { @class = "text-danger" })
+                                    </div>
+
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="form-group  row">
+                                <div class="col-lg-6">
+                                    <label class="col-sm-3 col-form-label text-right">
+                                        Tên jobs:
+                                    </label>
+                                    <div class="col-sm-9">
+                                        <input class="form-control">
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <label class="col-sm-3 col-form-label text-right">
+                                        Địa điểm làm việc (Tỉnh):
+                                    </label>
+                                    <div class="col-sm-9">
+                                        @Html.DropDownListFor(x => Model.SelectedCity, new SelectList(Model.Cities, "Value", "Text"), htmlAttributes: new { @class = "form-control", id = "City" })
+                                        @Html.ValidationMessageFor(x => x.SelectedCity, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+
+                                <div class="col-lg-6">
+                                    <label class="col-sm-3 col-form-label text-right">
+                                        Lương cơ bản:
+                                    </label>
+                                    <div class="col-sm-9">
+                                        <input class="form-control">
+                                    </div>
+
+
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <label class="col-sm-3 col-form-label text-right">
+                                        Phụ cấp:
+                                    </label>
+                                    <div class="col-sm-9">
+                                        <input class="form-control">
+                                    </div>
+
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="form-group  row">
+                                <div class="col-lg-6">
+                                    <label class="col-sm-3 col-form-label text-right">
+                                        Tổng thu nhập tháng:
+                                    </label>
+                                    <div class="col-sm-9">
+                                        <input class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group  row">
+                                <div class="col-lg-6">
+                                    <label class="col-sm-3 col-form-label text-right">
+                                        Người phụ trách jobs:
+                                    </label>
+                                    <div class="col-sm-9">
+                                        @Html.DropDownListFor(x => Model.SelectJobmanager, new SelectList(Model.Jobmanagers, "Value", "Text"), htmlAttributes: new { @class = "form-control", id = "Jobmanager" })
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <label class="col-sm-3 col-form-label text-right">
+                                        Đối tác cung cấp jobs:
+                                    </label>
+                                    <div class="col-sm-9">
+                                        <input class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="form-group row">
+                                <div class="col-lg-6">
+                                    <label class="col-md-3 control-label text-right">Yêu cầu tiếng Nhật khi thi tuyển:</label>
+                                    <div class="col-md-9 text-left">
+                                        <label class="radio-inline" for="tiengnhatthituyen-0">
+                                            <input type="radio" name="tiengnhatthituyen" id="tiengnhatthituyen-0" value="N1" checked="checked">
+                                            N1
+                                        </label>
+                                        <label class="radio-inline" for="tiengnhatthituyen-1">
+                                            <input type="radio" name="tiengnhatthituyen" id="tiengnhatthituyen-1" value="N2">
+                                            N2
+                                        </label>
+                                        <label class="radio-inline" for="tiengnhatthituyen-2">
+                                            <input type="radio" name="tiengnhatthituyen" id="tiengnhatthituyen-2" value="N3">
+                                            N3
+                                        </label>
+
+                                        <label class="radio-inline" for="tiengnhatthituyen-3">
+                                            <input type="radio" name="tiengnhatthituyen" id="tiengnhatthituyen-4" value="N4">
+                                            N4
+                                        </label>
+                                        <label class="radio-inline" for="tiengnhatthituyen-4">
+                                            <input type="radio" name="tiengnhatthituyen" id="tiengnhatthituyen-4" value="N5">
+                                            N5
+                                        </label>
+                                        <label class="radio-inline" for="tiengnhatthituyen-5">
+                                            <input type="radio" name="tiengnhatthituyen" id="tiengnhatthituyen-5" value="Không">
+                                            Không
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <label class="col-md-3 control-label text-right">Yêu cầu tiếng Nhật khi xuất cảnh:</label>
+                                    <div class="col-md-9 text-left">
+                                        <label class="radio-inline" for="tiengnhatxuatcanh-0">
+                                            <input type="radio" name="tiengnhatxuatcanh" id="tiengnhatxuatcanh-0 value="1" checked="checked">
+                                            N1
+                                        </label>
+                                        <label class="radio-inline" for="tiengnhatxuatcanh-1">
+                                            <input type="radio" name="tiengnhatxuatcanh" id="tiengnhatxuatcanh-1" value="2">
+                                            N2
+                                        </label>
+                                        <label class="radio-inline" for="tiengnhatxuatcanh-2">
+                                            <input type="radio" name="tiengnhatxuatcanh" id="tiengnhatxuatcanh-2" value="2">
+                                            N3
+                                        </label>
+
+                                        <label class="radio-inline" for="tiengnhatxuatcanh-3">
+                                            <input type="radio" name="tiengnhatxuatcanh" id="tiengnhatxuatcanh-3" value="2">
+                                            N4
+                                        </label>
+                                        <label class="radio-inline" for="tiengnhatxuatcanh-4">
+                                            <input type="radio" name="tiengnhatxuatcanh" id="tiengnhatxuatcanh-4" value="2">
+                                            N5
+                                        </label>
+                                        <label class="radio-inline" for="tiengnhatxuatcanh-5">
+                                            <input type="radio" name="tiengnhatxuatcanh" id="tiengnhatxuatcanh-5" value="2">
+                                            Không
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group  row">
+                                <div class="col-lg-6">
+                                    <label class="col-sm-3 col-form-label text-right">
+                                        Các yêu cầu khác:
+                                    </label>
+                                    <div class="col-sm-9">
+                                        <textarea class="form-control"></textarea>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <label class="col-sm-3 col-form-label text-right">
+                                        Ghi chú:
+                                    </label>
+                                    <div class="col-sm-9">
+                                        <textarea class="form-control"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group  row">
+
+                                <div class="col-lg-6">
+                                    <label class="col-sm-3 col-form-label text-right">Yêu cầu số trúng tuyển dự kiến:</label>
+                                    <div class="col-sm-9">
+                                        <div class="col-lg-8">
+                                            <input class="form-control " />
+                                        </div>
+                                        <div class="col-lg-4 text-left">
+                                            <label class="radio-inline" for="checkbox-nam ">
+                                                <input type="checkbox" name="checkbox-nam" id="checkbox-nam" value="Nam">
+                                                Nam
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <label class="col-sm-3 col-form-label text-right"></label>
+                                    <div class="col-sm-9">
+                                        <div class="col-lg-8">
+                                            <input class="form-control" />
+                                        </div>
+                                        <div class="col-lg-4 text-left">
+                                            <label class="radio-inline" for="checkbox-nu ">
+                                                <input type="checkbox" name="checkbox-nu" id="checkbox-nu" value="Nữ">
+                                                Nữ
+                                            </label>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+
+                                <div class="col-lg-6">
+                                    <label class="col-sm-3 col-form-label text-right">Yêu cầu số Form vào thi:</label>
+                                    <div class="col-sm-9">
+                                        <div class="col-lg-8">
+                                            <input class="form-control " />
+                                        </div>
+                                        <div class="col-lg-4 text-left">
+                                            <label class="radio-inline" for="checkbox-nam ">
+                                                <input type="checkbox" name="checkbox-nam" id="checkbox-nam" value="Nam">
+                                                Nam
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <label class="col-sm-3 col-form-label text-right"></label>
+                                    <div class="col-sm-9">
+                                        <div class="col-lg-8">
+                                            <input class="form-control" />
+                                        </div>
+                                        <div class="col-lg-4 text-left">
+                                            <label class="radio-inline" for="checkbox-nu ">
+                                                <input type="checkbox" name="checkbox-nu" id="checkbox-nu" value="Nữ">
+                                                Nữ
+                                            </label>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group  row">
+                                <div class="col-lg-6">
+                                    <label class="col-sm-3 col-form-label text-right">
+                                        Ngày chốt form:
+                                    </label>
+                                    <div class="col-sm-9">
+                                        <input class="form-control date-field" />
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <label class="col-sm-3 col-form-label text-right">
+                                        Hình thức thi tuyển:
+                                    </label>
+                                    <div class="col-sm-9">
+                                        <input class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group  row">
+                                <div class="col-lg-6">
+                                    <label class="col-sm-3 col-form-label text-right">Thời gian bay dự kiến:</label>
+                                    <div class="col-sm-9">
+                                        <input class="form-control date-field" />
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <label class="col-sm-2 col-form-label text-right">Trúng tuyển:</label>
+                                    <div class="col-sm-10">
+                                        <div class="col-lg-2">
+                                            <input type="checkbox" name="checkbox-nu" id="checkbox-nu" value="Trúng tuyển">
+                                        </div>
+                                        <div class="col-lg-10">
+                                            <label class="col-sm-5 col-form-label text-right">Ngày trúng tuyển:</label>
+                                            <div class="col-sm-7">
+                                                <input class="form-control " />
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group  row">
+                                <div class="col-lg-6">
+                                    <label class="col-sm-3 col-form-label text-right">Hợp tác nguồn:</label>
+                                    <div class="col-sm-9">
+                                        <input class="form-control" />
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <label class="col-sm-3 col-form-label text-right">Mức chia sẻ nguồn:</label>
+                                    <div class="col-sm-9">
+                                        <input class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group  row">
+                                <div class="col-lg-6">
+                                    <label class="col-sm-3 col-form-label text-right">
+                                        Tên đầu nguồn:
+                                    </label>
+                                    <div class="col-sm-9">
+                                        <input class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group  row">
+                                <div class="col-lg-6">
+                                    <label class="col-sm-3 col-form-label text-right">
+                                        Số điện thoại đầu nguồn:
+                                    </label>
+                                    <div class="col-sm-9">
+                                        <input class="form-control">
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <label class="col-sm-3 col-form-label text-right">
+                                        Email/Facebook:
+                                    </label>
+                                    <div class="col-sm-9">
+                                        <input class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group  row">
+                                <div class="col-lg-6">
+                                    <label class="col-sm-3 col-form-label text-right">
+                                        Đã xuất cảnh:
+                                    </label>
+                                    <div class="col-sm-9">
+                                        <input type="checkbox">
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <label class="col-sm-3 col-form-label text-right">
+                                        Ngày thực tế xuất cảnh:
+                                    </label>
+                                    <div class="col-sm-9">
+                                        <input class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group  row">
+                                <div class="col-lg-6">
+                                    <label class="col-sm-3 col-form-label text-right">
+                                        Tên xí nghiệp:
+                                    </label>
+                                    <div class="col-sm-9">
+                                        <input class="form-control">
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <label class="col-sm-3 col-form-label text-right">
+                                        Tỉnh ứng viên làm việc:
+                                    </label>
+                                    <div class="col-sm-9">
+                                        @Html.DropDownListFor(x => Model.SelectedCity, new SelectList(Model.Cities, "Value", "Text"), htmlAttributes: new { @class = "form-control", id = "Region" })
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group  row">
+                                <div class="col-lg-6">
+                                    <label class="col-sm-3 col-form-label text-right">
+                                        Địa điểm làm việc chi tiết:
+                                    </label>
+                                    <div class="col-sm-9">
+                                        <input class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group  row">
+                                <div class="col-lg-6">
+                                    <label class="col-sm-3 col-form-label text-right">
+                                        Tổng Phí thu từ Khách hàng (USD) :
+                                    </label>
+                                    <div class="col-sm-9">
+                                        <input class="form-control">
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <label class="col-sm-3 col-form-label text-right">
+                                        Ngày thu phí :
+                                    </label>
+                                    <div class="col-sm-9">
+                                        <input class="form-control date-field">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <div class="col-lg-4">
+                                    <label class="col-sm-4 col-form-label text-right">
+                                        Tiền Việt :
+                                    </label>
+                                    <div class="col-sm-8">
+                                        <input class="form-control ">
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <label class="col-sm-4 col-form-label text-right">
+                                        Tiền Yên Nhật :
+                                    </label>
+                                    <div class="col-sm-8">
+                                        <input class="form-control ">
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <label class="col-sm-4 col-form-label text-right">
+                                        Tiền USD :
+                                    </label>
+                                    <div class="col-sm-8">
+                                        <input class="form-control ">
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="form-group row">
+                                <div class="col-lg-4">
+                                    <label class="col-sm-4 col-form-label text-right">
+                                        Tỷ giá chuyển đổi VND - USD :
+                                    </label>
+                                    <div class="col-sm-8">
+                                        <input class="form-control ">
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <label class="col-sm-4 col-form-label text-right">
+                                        Tỷ giá chuyển đổi Yên Nhật - USD :
+                                    </label>
+                                    <div class="col-sm-8">
+                                        <input class="form-control ">
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <label class="col-sm-4 col-form-label text-right">
+
+                                    </label>
+                                    <div class="col-sm-8">
+                                        <input class="form-control ">
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="form-group  row">
+                                <div class="col-lg-6">
+                                    <label class="col-sm-3 col-form-label text-right">
+                                        Thời gian thu tiền lần 1 từ khách hàng  :
+                                    </label>
+                                    <div class="col-sm-9">
+                                        <input class="form-control date-field">
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <label class="col-sm-3 col-form-label text-right">
+                                        Phí còn lại phải thu từ khách hàng sau lần 1 (USD):  :
+                                    </label>
+                                    <div class="col-sm-9">
+                                        <input class="form-control ">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group  row">
+                                <div class="col-lg-6">
+                                    <label class="col-sm-3 col-form-label text-right">
+                                        Tổng Phí thu từ khách hàng lần 2 (USD):
+                                    </label>
+                                    <div class="col-sm-9">
+                                        <input class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <div class="col-lg-4">
+                                    <label class="col-sm-4 col-form-label text-right">
+                                        Tiền Việt :
+                                    </label>
+                                    <div class="col-sm-8">
+                                        <input class="form-control ">
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <label class="col-sm-4 col-form-label text-right">
+                                        Tiền Yên Nhật :
+                                    </label>
+                                    <div class="col-sm-8">
+                                        <input class="form-control ">
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <label class="col-sm-4 col-form-label text-right">
+                                        Tiền USD :
+                                    </label>
+                                    <div class="col-sm-8">
+                                        <input class="form-control ">
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="form-group row">
+                                <div class="col-lg-4">
+                                    <label class="col-sm-4 col-form-label text-right">
+                                        Tỷ giá chuyển đổi VND - USD :
+                                    </label>
+                                    <div class="col-sm-8">
+                                        <input class="form-control ">
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <label class="col-sm-4 col-form-label text-right">
+                                        Tỷ giá chuyển đổi Yên Nhật - USD :
+                                    </label>
+                                    <div class="col-sm-8">
+                                        <input class="form-control ">
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <label class="col-sm-4 col-form-label text-right">
+
+                                    </label>
+                                    <div class="col-sm-8">
+                                        <input class="form-control ">
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="form-group  row">
+                                <div class="col-lg-6">
+                                    <label class="col-sm-3 col-form-label text-right">
+                                        Thời gian thu tiền lần 2 từ khách hàng:
+                                    </label>
+                                    <div class="col-sm-9">
+                                        <input class="form-control date-field">
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <label class="col-sm-3 col-form-label text-right">
+                                        Phí còn lại phải thu từ khách hàng sau lần 2 (USD):
+                                    </label>
+                                    <div class="col-sm-9">
+                                        <input class="form-control ">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group  row">
+                                <div class="col-lg-6">
+                                    <label class="col-sm-3 col-form-label text-right">
+                                        Thời gian thu tiền lần 3 từ khách hàng:
+                                    </label>
+                                    <div class="col-sm-9">
+                                        <input class="form-control date-field">
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="form-group row">
+                                <div class="col-lg-4">
+                                    <label class="col-sm-4 col-form-label text-right">
+                                        Tiền Việt :
+                                    </label>
+                                    <div class="col-sm-8">
+                                        <input class="form-control ">
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <label class="col-sm-4 col-form-label text-right">
+                                        Tiền Yên Nhật :
+                                    </label>
+                                    <div class="col-sm-8">
+                                        <input class="form-control ">
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <label class="col-sm-4 col-form-label text-right">
+                                        Tiền USD :
+                                    </label>
+                                    <div class="col-sm-8">
+                                        <input class="form-control ">
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="form-group row">
+                                <div class="col-lg-4">
+                                    <label class="col-sm-4 col-form-label text-right">
+                                        Tỷ giá chuyển đổi VND - USD :
+                                    </label>
+                                    <div class="col-sm-8">
+                                        <input class="form-control ">
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <label class="col-sm-4 col-form-label text-right">
+                                        Tỷ giá chuyển đổi Yên Nhật - USD :
+                                    </label>
+                                    <div class="col-sm-8">
+                                        <input class="form-control ">
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <label class="col-sm-4 col-form-label text-right">
+
+                                    </label>
+                                    <div class="col-sm-8">
+                                        <input class="form-control ">
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="form-group  row">
+                                <div class="col-lg-6">
+                                    <label class="col-sm-3 col-form-label text-right">
+                                        Tổng Phí thu từ ứng viên (USD):
+                                    </label>
+                                    <div class="col-sm-9">
+                                        <input class="form-control">
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <label class="col-sm-3 col-form-label text-right">
+                                        Ngày thu phí :
+                                    </label>
+                                    <div class="col-sm-9">
+                                        <input class="form-control date-field">
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="form-group row">
+                                <div class="col-lg-4">
+                                    <label class="col-sm-4 col-form-label text-right">
+                                        Tiền Việt :
+                                    </label>
+                                    <div class="col-sm-8">
+                                        <input class="form-control ">
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <label class="col-sm-4 col-form-label text-right">
+                                        Tiền Yên Nhật :
+                                    </label>
+                                    <div class="col-sm-8">
+                                        <input class="form-control ">
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <label class="col-sm-4 col-form-label text-right">
+                                        Tiền USD :
+                                    </label>
+                                    <div class="col-sm-8">
+                                        <input class="form-control ">
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="form-group row">
+                                <div class="col-lg-4">
+                                    <label class="col-sm-4 col-form-label text-right">
+                                        Tỷ giá chuyển đổi VND - USD :
+                                    </label>
+                                    <div class="col-sm-8">
+                                        <input class="form-control ">
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <label class="col-sm-4 col-form-label text-right">
+                                        Tỷ giá chuyển đổi Yên Nhật - USD :
+                                    </label>
+                                    <div class="col-sm-8">
+                                        <input class="form-control ">
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <label class="col-sm-4 col-form-label text-right">
+
+                                    </label>
+                                    <div class="col-sm-8">
+                                        <input class="form-control ">
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="form-group  row">
+                                <div class="col-lg-6">
+                                    <label class="col-sm-3 col-form-label text-right">
+                                        Tổng Phí thu từ ứng viên lần 1 (USD):
+                                    </label>
+                                    <div class="col-sm-9">
+                                        <input class="form-control date-field">
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="form-group row">
+                                <div class="col-lg-4">
+                                    <label class="col-sm-4 col-form-label text-right">
+                                        Tiền Việt :
+                                    </label>
+                                    <div class="col-sm-8">
+                                        <input class="form-control ">
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <label class="col-sm-4 col-form-label text-right">
+                                        Tiền Yên Nhật :
+                                    </label>
+                                    <div class="col-sm-8">
+                                        <input class="form-control ">
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <label class="col-sm-4 col-form-label text-right">
+                                        Tiền USD :
+                                    </label>
+                                    <div class="col-sm-8">
+                                        <input class="form-control ">
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="form-group row">
+                                <div class="col-lg-4">
+                                    <label class="col-sm-4 col-form-label text-right">
+                                        Tỷ giá chuyển đổi VND - USD :
+                                    </label>
+                                    <div class="col-sm-8">
+                                        <input class="form-control ">
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <label class="col-sm-4 col-form-label text-right">
+                                        Tỷ giá chuyển đổi Yên Nhật - USD:
+                                    </label>
+                                    <div class="col-sm-8">
+                                        <input class="form-control ">
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <label class="col-sm-4 col-form-label text-right">
+
+                                    </label>
+                                    <div class="col-sm-8">
+                                        <input class="form-control ">
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="form-group  row">
+                                <div class="col-lg-6">
+                                    <label class="col-sm-3 col-form-label text-right">
+                                        Thời gian thu tiền lần 1 từ ứng viên:
+                                    </label>
+                                    <div class="col-sm-9">
+                                        <input class="form-control date-field">
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <label class="col-sm-3 col-form-label text-right">
+                                        Phí còn lại phải thu từ ứng viên sau lần 1 (USD):
+                                    </label>
+                                    <div class="col-sm-9">
+                                        <input class="form-control ">
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="form-group  row">
+                                <div class="col-lg-6">
+                                    <label class="col-sm-3 col-form-label text-right">
+                                        Tổng Phí thu từ ứng viên lần 2 (USD):
+                                    </label>
+                                    <div class="col-sm-9">
+                                        <input class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <div class="col-lg-4">
+                                    <label class="col-sm-4 col-form-label text-right">
+                                        Tiền Việt :
+                                    </label>
+                                    <div class="col-sm-8">
+                                        <input class="form-control ">
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <label class="col-sm-4 col-form-label text-right">
+                                        Tiền Yên Nhật :
+                                    </label>
+                                    <div class="col-sm-8">
+                                        <input class="form-control ">
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <label class="col-sm-4 col-form-label text-right">
+                                        Tiền USD :
+                                    </label>
+                                    <div class="col-sm-8">
+                                        <input class="form-control ">
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="form-group row">
+                                <div class="col-lg-4">
+                                    <label class="col-sm-4 col-form-label text-right">
+                                        Tỷ giá chuyển đổi VND - USD :
+                                    </label>
+                                    <div class="col-sm-8">
+                                        <input class="form-control ">
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <label class="col-sm-4 col-form-label text-right">
+                                        Tỷ giá chuyển đổi Yên Nhật - USD:
+                                    </label>
+                                    <div class="col-sm-8">
+                                        <input class="form-control ">
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <label class="col-sm-4 col-form-label text-right">
+
+                                    </label>
+                                    <div class="col-sm-8">
+                                        <input class="form-control ">
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="form-group  row">
+                                <div class="col-lg-6">
+                                    <label class="col-sm-3 col-form-label text-right">
+                                        Thời gian thu tiền lần 2 từ ứng viên:
+                                    </label>
+                                    <div class="col-sm-9">
+                                        <input class="form-control date-field">
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <label class="col-sm-3 col-form-label text-right">
+                                        Phí còn lại phải thu từ ứng viên sau lần 2 (USD):
+                                    </label>
+                                    <div class="col-sm-9">
+                                        <input class="form-control ">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group  row">
+                                <div class="col-lg-6">
+                                    <label class="col-sm-3 col-form-label text-right">
+                                        Tổng Phí thu từ ứng viên lần 3 (USD):
+                                    </label>
+                                    <div class="col-sm-9">
+                                        <input class="form-control ">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <div class="col-lg-4">
+                                    <label class="col-sm-4 col-form-label text-right">
+                                        Tiền Việt :
+                                    </label>
+                                    <div class="col-sm-8">
+                                        <input class="form-control ">
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <label class="col-sm-4 col-form-label text-right">
+                                        Tiền Yên Nhật :
+                                    </label>
+                                    <div class="col-sm-8">
+                                        <input class="form-control ">
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <label class="col-sm-4 col-form-label text-right">
+                                        Tiền USD :
+                                    </label>
+                                    <div class="col-sm-8">
+                                        <input class="form-control ">
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="form-group row">
+                                <div class="col-lg-4">
+                                    <label class="col-sm-4 col-form-label text-right">
+                                        Tỷ giá chuyển đổi VND - USD :
+                                    </label>
+                                    <div class="col-sm-8">
+                                        <input class="form-control ">
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <label class="col-sm-4 col-form-label text-right">
+                                        Tỷ giá chuyển đổi Yên Nhật - USD:
+                                    </label>
+                                    <div class="col-sm-8">
+                                        <input class="form-control ">
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <label class="col-sm-4 col-form-label text-right">
+
+                                    </label>
+                                    <div class="col-sm-8">
+                                        <input class="form-control ">
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="form-group  row">
+                                <div class="col-lg-6">
+                                    <label class="col-sm-3 col-form-label text-right">
+                                        Tổng số tiền phải thu:
+                                    </label>
+                                    <div class="col-sm-9">
+                                        <input class="form-control">
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <label class="col-sm-3 col-form-label text-right">
+                                        Tổng số tiền đã thu:
+                                    </label>
+                                    <div class="col-sm-9">
+                                        <input class="form-control ">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group  row">
+                                <div class="col-lg-6">
+                                    <label class="col-sm-3 col-form-label text-right">
+                                        Tổng số tiền còn lại phải thu:
+                                    </label>
+                                    <div class="col-sm-9">
+                                        <input class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            <button type="submit" class="btn btn-primary">Lưu hồ sơ</button>
+
+
+                        </div>
+                        <!-- /.col-lg-6 (nested) -->
+
+                    </div>
+                    <!-- /.row (nested) -->
+                </div>
+                <!-- /.panel-body -->
+            </div>
+            <!-- /.panel -->
+        </div>
+        <!-- /.col-lg-12 -->
+    </div>
+    <!-- /.row -->
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
