@@ -7,7 +7,7 @@ namespace HoangHung_ERP_System.Data
 {
     public class ApplicationDbContext : DbContext
     {
-        public ApplicationDbContext() : base("DbContext")
+        public ApplicationDbContext() : base("ApplicationDbContext")
         {
 
         }
